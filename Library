@@ -24,12 +24,12 @@ public class Library {
 		customer.setBook(book);
 		customer.setLibrarycard(card);
 		customer.setCheckoutdate();
-		checkout(book,name,card);
-		dueDate(customer.checkoutDate);
+		checkout(book,name,card, customer.checkoutDate);
+		
 		
 	}
 	//check out book from library
-	void checkout(String book,String name, String card) {
+	void checkout(String book,String name, String card, LocalDate date) {
 		Boolean available = false;
 		for(int i  = 0;i < 10;i++) {
 			//checks if the book is in the library
@@ -42,7 +42,7 @@ public class Library {
 				//adds customer to the library system for those who have checked out a book
 				addCustomer(name, card);
 				System.out.println(book+" has been checked out!");
-				
+				dueDate(date);
 				break;
 			}
 		}
@@ -128,16 +128,32 @@ public class Library {
 	public static void main(String[] args) {
 		//testing out methods
 		Library l1 = new Library();
+		//test date
+		LocalDate date = LocalDate.now();
 		
 		l1.addBook("new world","Patrick");
 		l1.addBook("chasers","cole");
-		l1.checkout("new world", "lenny","SD987HJ");
-		l1.checkout("cheese","sara","NH768T");
+		l1.checkout("new world", "lenny","SD987HJ", date);
+		l1.checkout("cheese","sara","NH768T", date);
 		l1.checkTitle("chasers");
 		l1.checkTitle("zappers");
 		l1.checkAuthor("Patrick");
 		l1.createCustomer("christie","up","AS89777GH");
-		
+		l1.createCustomer("bob","chasers","GU89746HJ");
+		l1.createCustomer("James Bond","suckers","GA33346HL");
+		l1.addBook("Pony Princess","Caramel");
+		l1.addBook("Blue Hue","Smurfs");
+		l1.addBook("Farts","Big Bang Theory");
+		l1.addBook("Halloween","October");
+		l1.addBook("Chicken and","Rice");
+		l1.addBook("High Five","Sam Smith");
+		l1.addBook("Barney","Flora Door");
+		l1.createCustomer("Tatiana Pink","Blue Hue","GPO1146CW");
+		l1.createCustomer("Jennifer Lopez","Aqua Man","ZZ4567BR");
+		l1.checkTitle("Halloween");
+		l1.checkAuthor("Smurfs");
+		l1.createCustomer("Jennifer Lopez","High Five","ZZ4567BR");
+		l1.createCustomer("Rauw Alejandro","Farts","ZZ4567BR");
 	}
 
 	public class Person{
